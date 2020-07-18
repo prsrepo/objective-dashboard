@@ -1,51 +1,26 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 from django.views import View
+from .service.objective_handler import ObjectiveHandler
+from .service.department_handler import DepartmentHandler
+from .service.team_handler import TeamHandler
 
 # from .forms import MyForm
 
+
 class ObjectivesSummary(View):
-    # form_class = MyForm
     def get(self, request):
-        return HttpResponse({
-            "data": {
-                "objectives": 80,
-                "completed": 60,
-                "start_time": "15-06-2020"
-            }
-        })
+        response = ObjectiveHandler().get_object_summary()
+        return JsonResponse(response)
+
 
 class Departments(View):
     def get(self, request):
-        return HttpResponse({
-            "data": [
-                {
-                    "name": "sales",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                },
-                {
-                    "name": "sales",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                }
-            ]
-        })
+        response = DepartmentHandler().get_departments()
+        return JsonResponse(response)
 
 
 class Teams(View):
     def post(self, request):
-        return HttpResponse({
-            "data": [
-                {
-                    "lead": "alex",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                },
-                {
-                    "lead": "sales",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                }
-            ]
-        })
+        response = TeamHandler().get_teams(request.data)
+        return JsonResponse(response)
+
