@@ -50,9 +50,11 @@ Dummy data can be created using the script provided, The usage as below,
     >>> dump_data()
 
 
-### Postman collection
+### Postman
 
-    https://www.getpostman.com/collections/15740f56c5ca67052a57
+[Collection Link](https://www.getpostman.com/collections/15740f56c5ca67052a57)
+
+
 
 ## Task to be done
 
