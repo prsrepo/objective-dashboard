@@ -1,4 +1,6 @@
+from django.http import JsonResponse
 
+from ..models import Department
 
 
 class DepartmentHandler:
@@ -6,17 +8,8 @@ class DepartmentHandler:
         pass
 
     def get_departments(self):
-        return {
-            "data": [
-                {
-                    "name": "sales",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                },
-                {
-                    "name": "sales",
-                    "objectives": 10,
-                    "no_of_employees": 2
-                }
-            ]
-        }
+        departments = Department.objects.all()
+        return JsonResponse({
+            "data": list(departments.values())
+        })
+

@@ -1,26 +1,21 @@
-from django.http import JsonResponse
 from django.views import View
 from .service.objective_handler import ObjectiveHandler
 from .service.department_handler import DepartmentHandler
 from .service.team_handler import TeamHandler
-
-# from .forms import MyForm
+from json import loads
 
 
 class ObjectivesSummary(View):
     def get(self, request):
-        response = ObjectiveHandler().get_object_summary()
-        return JsonResponse(response)
+        return ObjectiveHandler().get_summary()
 
 
 class Departments(View):
     def get(self, request):
-        response = DepartmentHandler().get_departments()
-        return JsonResponse(response)
+        return DepartmentHandler().get_departments()
 
 
 class Teams(View):
     def post(self, request):
-        response = TeamHandler().get_teams(request.data)
-        return JsonResponse(response)
+        return TeamHandler().get_teams(loads(request.body))
 
