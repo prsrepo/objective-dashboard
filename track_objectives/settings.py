@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET', '(r@#b-+)y-*4x83rncxxt(w(p$p5@dv-5y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'track_objectives.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'HOST': os.environ.get('DB_HOST', None),
+        'PORT': os.environ.get('DB_PORT', None),
+        'USER': os.environ.get('DB_USER', None),
+        'PASSWORD': os.environ.get('DB_PASSWORD', None)
     }
 }
 
@@ -121,9 +125,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
 
