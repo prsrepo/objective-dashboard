@@ -37,7 +37,7 @@ and run following command,
     $ export $(xargs < .env_sample)
     $ python manage.py runserver
 
-once the database is connection is done, run following commands to create tables and relationships, 
+Once the database connection is completed, run following commands to create tables and relationships, 
 
     $ python manage.py makemigrations
     $ python manage.py migrate
